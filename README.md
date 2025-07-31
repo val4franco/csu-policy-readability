@@ -1,25 +1,123 @@
+# CSU Policy Explorer Chatbot
 
-# Retaliation Complaint Procedure
+This project creates a chatbot interface for exploring California State University (CSU) policy documents. It combines public and private sources, processes documents into searchable chunks, and organizes them for use in retrieval-augmented generation.
 
-## Timelines and Extensions
-Unless otherwise noted, all timelines contained within this policy refer to Working Days or calendar months.
+---
 
-Timelines set forth in this policy may be extended by the Appropriate Administrator, provided the Complainant is informed of the new timeline in writing. In no instance shall the extension be more than 18 calendar months from the Filing Date.⁸
+## 📚 Overview
 
-## Retaliation Complaint Procedure
-Any Employee, Former Employee or Applicant for CSU employment may submit allegations of Retaliation for having made a Protected Disclosure. The Retaliation Complaint may be submitted to the Employee's supervisor or manager, or with the Appropriate Administrator.⁹ Supervisors or managers must immediately deliver Retaliation Complaints to the Appropriate Administrator. Retaliation Complaints against the Chancellor, a President and/or Vice President and Retaliation Complaints made by Chancellor's Office Employees may be filed with the CO. The Appropriate Administrator will conduct a Preliminary Review to determine if the Retaliation Complaint will be processed by the CO.
+We built a system to collect, process, and prepare CSU policy documents for use in a chatbot interface. Users can explore policies through conversational queries.
 
-Allegations must be submitted in writing to ensure a clear understanding of the issues raised. Reasonable accommodations may be made for Complainants with disabilities.
+---
 
-The Retaliation Complaint must be received by the Appropriate Administrator within 12 calendar months of the most recent alleged act of Retaliation.¹⁰ The Filing Date is the date the Retaliation Complaint was received by the Employee's supervisor, manager, or the Appropriate Administrator.
+## 🔍 Sources
 
-The Retaliation Complaint may be made on the form attached as Attachment A or in any other writing that clearly indicates the intent to file a Retaliation Complaint for having made a Protected Disclosure or specifically references this policy.
+- **Public Policies**: Collected from [calstate.policystat.com](https://calstate.policystat.com/)
+- **Private Policies**: Internal SDSU policies (login required)
 
-### The Retaliation Complaint shall contain the following:
-- The Complainant's name, position title or position applied for, mailing address, phone number, and email address.
-- A detailed description of the original Protected Disclosure that led to the alleged Retaliation, including the name(s) and title(s) of the responsible Employee(s) who were alleged to have engaged in the Improper Governmental Activities.
-- The name(s) of the individual(s) to whom the Improper Governmental Activity was reported, and the date and manner of the disclosure.
-- A description of the alleged actual or attempted retaliatory actions, including the date(s), the name(s) and title(s) of the Employee(s) who were alleged to have engaged in Retaliation, and an explanation of the reasons why those actions constituted Retaliation.
-- A list of witnesses to the alleged actual or attempted retaliatory actions, including their names, positions, contact information, and the facts known by each.
-- Copies of any documentary evidence that supports the Retaliation Complaint.
-- A dated, Sworn Statement by the Complainant under penalty of perjury that the Retaliation Complaint is true or is believed by the Complainant to be true.
+---
+
+## 🧾 Step-by-Step Process
+
+### 1. Download Policies CSV
+
+We started with a CSV file called:
+
+```
+report.csv
+```
+
+which includes metadata and policy links.
+
+---
+
+### 2. Convert CSV to JSON
+
+We ran:
+
+```
+scrape_policy_texts_by_area.py
+```
+
+This script converted `report.csv` to a structured JSON file:
+
+```
+calstate-policystat-list.json
+```
+
+Each entry looks like:
+
+```json
+{
+  "PolicyStat Id": 10719972,
+  "Title": "2021 – 2022 Emergency Grant Allocation",
+  "URL": "https://calstate.policystat.com/policy/10719972/",
+  "Area": "Academic and Student Affairs",
+  "Owner": "Grommo, April: Asst VC, Enroll Mgmt Srvcs",
+  "Last Approved": "2021-12-07",
+  "Has Attachments": "Yes",
+  "Restricted": "Public"
+}
+```
+
+---
+
+### 3. Web Scraping with Selenium
+
+We used `Selenium` to:
+
+- Scrape the main policy text
+- Download attachments (PDFs)
+- Organize content by **Area** and **Title**
+
+Directory structure:
+
+```
+policystat_texts/
+├── Academic and Student Affairs/
+│   ├── 2021 – 2022 Emergency Grant Allocation/
+│   │   ├── 2021 – 2022 Emergency Grant Allocation.txt
+│   │   └── attachments/
+│   │       └── CSU Emergency Assistance Grant Application Example.pdf
+```
+
+---
+
+### 4. Chunking Policy Texts and PDFs
+
+We split:
+
+- `.txt` policy files into text chunks
+- `.pdf` attachments into per-page or logical chunks
+
+Each folder contains:
+
+```
+├── chunks/
+│   ├── chunk_001.txt
+│   ├── chunk_002.txt
+├── attachments/
+│   ├── [original PDFs]
+```
+
+---
+
+## ✅ Project Output
+
+- `calstate-policystat-list.json`: structured metadata
+- `policystat_texts/`: organized policy documents
+- All text and PDFs split into retrieval-ready chunks
+
+---
+
+## 💬 Future Work
+
+- Embed text chunks using vector database
+- Deploy chatbot with LLM retrieval backend (e.g., OpenAI, Claude, etc.)
+- Add SDSU internal policies once integrated securely
+
+---
+
+## 🧠 Authors
+
+- Savannah Bosley and collaborators
