@@ -77,8 +77,7 @@ policystat_texts/
 ├── Academic and Student Affairs/
 │   ├── 2021 – 2022 Emergency Grant Allocation/
 │   │   ├── 2021 – 2022 Emergency Grant Allocation.txt
-│   │   └── attachments/
-│   │       └── CSU Emergency Assistance Grant Application Example.pdf
+│   │   ├── CSU Emergency Assistance Grant Application Example.pdf
 ```
 
 ---
@@ -90,14 +89,20 @@ We split:
 - `.txt` policy files into text chunks
 - `.pdf` attachments into per-page or logical chunks
 
-Each folder contains:
+Each policy folder contains:
 
 ```
-├── chunks/
+2021 – 2022 Emergency Grant Allocation/
+├── 2021 – 2022 Emergency Grant Allocation.txt
+├── chunk_001_og.txt
+├── chunk_001_og_metadata.json
+├── chunk_002_og.txt
+├── chunk_002_og_metadata.json
+├── CSU Emergency Assistance Grant Application Example/
 │   ├── chunk_001.txt
+│   ├── chunk_001_metadata.json
 │   ├── chunk_002.txt
-├── attachments/
-│   ├── [original PDFs]
+│   ├── chunk_002_metadata.json
 ```
 
 ---
@@ -106,7 +111,7 @@ Each folder contains:
 
 - `calstate-policystat-list.json`: structured metadata
 - `policystat_texts/`: organized policy documents
-- All text and PDFs split into retrieval-ready chunks
+- All text and PDFs split into retrieval-ready chunks with metadata
 
 ---
 
