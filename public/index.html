@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSU Policy Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .homepage-logo {
+            width: 350px !important;
+            height: 350px !important;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .homepage-logo:hover {
+            transform: scale(1.1);
+        }
+        .yak-logo {
+            position: static !important;
+            margin: 0 auto 5px auto;
+            display: block;
+        }
+
+        .university-logo {
+            display: none;
+        }
+        .header-logos {
+            justify-content: center;
+        }
+        .hero {
+            text-align: center;
+            padding: 25px 25px;
+            margin: 0;
+            background: #ffffff;
+            border-radius: 24px;
+        }
+
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 16px 36px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-8px); }
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        .feature {
+            text-align: center;
+            padding: 35px 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f1b82d;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .feature:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .feature h3 {
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .feature p {
+            color: #555;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .homepage-logo {
+                width: 250px !important;
+                height: 250px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="accessibility-toggle" onclick="toggleAccessibility()">🔍</button>
+        <div id="accessibilityPanel" class="accessibility-panel hidden">
+            <h3>Accessibility Options</h3>
+            <div class="font-controls">
+                <label>Font Size:</label>
+                <button onclick="changeFontSize('small')">Small</button>
+                <button onclick="changeFontSize('normal')">Normal</button>
+                <button onclick="changeFontSize('large')">Large</button>
+                <button onclick="changeFontSize('xlarge')">Extra Large</button>
+            </div>
+            <div class="color-controls">
+                <label>Color Mode:</label>
+                <button onclick="changeColorMode('normal')">Normal</button>
+                <button onclick="changeColorMode('protanopia')">Red-Blind</button>
+                <button onclick="changeColorMode('deuteranopia')">Green-Blind</button>
+                <button onclick="changeColorMode('tritanopia')">Blue-Blind</button>
+            </div>
+
+
+            <div class="letter-controls">
+                <label>Letter Spacing:</label>
+                <button onclick="changeLetterSpacing('normal')">Normal</button>
+                <button onclick="changeLetterSpacing('wide')">Wide</button>
+                <button onclick="changeLetterSpacing('wider')">Wider</button>
+            </div>
+        </div>
+        <header>
+            <div class="header-logos">
+                <img id="yakLogo" src="YakBook.png" alt="YakBook Logo" class="logo yak-logo homepage-logo">
+                <img id="universityLogo" src="logo-202-CSU.png" alt="University Logo" class="logo university-logo homepage-logo">
+            </div>
+            <h1 id="mainTitle">CSU Policy Assistant</h1>
+            <p id="mainSubtitle">Your intelligent guide to CSU policies and procedures</p>
+        </header>
+        
+        <div class="hero">
+            <p>Search through HR policies, academic procedures, student guidelines, and more. Our intelligent chatbot understands natural language and provides accurate, relevant information from official CSU documentation.</p>
+            <a href="chat.html" class="cta-button">Start Chatting</a>
+        </div>
+    </div>
+    
+    <script src="config.js"></script>
+    <script src="accessibility.js"></script>
+    <script>
+        // Apply theme based on university selection
+        if (window.CONFIG && window.CONFIG.university === 'sdsu') {
+            document.body.classList.add('sdsu-theme');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSU Policy Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-logos">
+                <img id="yakLogo" src="Yak.png" alt="Yak Logo" class="logo yak-logo">
+                <img id="universityLogo" src="https://via.placeholder.com/80x80/1e4d2b/f1b82d?text=CSU" alt="University Logo" class="logo university-logo">
+            </div>
+            <a href="index.html" class="home-button">Home</a>
+            <button class="accessibility-toggle" onclick="toggleAccessibility()">🔍</button>
+            <h1 id="mainTitle">CSU Policy Assistant</h1>
+            <p id="mainSubtitle">Ask questions about CSU policies and get instant answers</p>
+        </header>
+        
+        <div id="accessibilityPanel" class="accessibility-panel hidden">
+            <h3>Accessibility Options</h3>
+            <div class="font-controls">
+                <label>Font Size:</label>
+                <button onclick="changeFontSize('small')">Small</button>
+                <button onclick="changeFontSize('normal')">Normal</button>
+                <button onclick="changeFontSize('large')">Large</button>
+                <button onclick="changeFontSize('xlarge')">Extra Large</button>
+            </div>
+            <div class="color-controls">
+                <label>Color Mode:</label>
+                <button onclick="changeColorMode('normal')">Normal</button>
+                <button onclick="changeColorMode('protanopia')">Red-Blind</button>
+                <button onclick="changeColorMode('deuteranopia')">Green-Blind</button>
+                <button onclick="changeColorMode('tritanopia')">Blue-Blind</button>
+            </div>
+
+
+            <div class="letter-controls">
+                <label>Letter Spacing:</label>
+                <button onclick="changeLetterSpacing('normal')">Normal</button>
+                <button onclick="changeLetterSpacing('wide')">Wide</button>
+                <button onclick="changeLetterSpacing('wider')">Wider</button>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <select id="universitySelector">
+                <option value="csu">All CSU</option>
+                <option value="sdsu">San Diego State University</option>
+            </select>
+            
+            <select id="areaFilter">
+                <option value="">All Areas</option>
+                <option value="Academic and Student Affairs">Academic and Student Affairs</option>
+                <option value="Audit and Advisory Services">Audit and Advisory Services</option>
+                <option value="Board of Trustees">Board of Trustees</option>
+                <option value="Business and Finance">Business and Finance</option>
+                <option value="Chancellor">Chancellor</option>
+                <option value="External Relations and Communication">External Relations and Communication</option>
+                <option value="Human Resources">Human Resources</option>
+            </select>
+        </div>
+        
+        <div class="chat-container">
+            <div id="chatMessages" class="chat-messages"></div>
+            
+            <div class="input-container">
+                <input type="text" id="messageInput" placeholder="Ask about CSU policies..." autocomplete="off">
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+        
+        <div id="policyCards" class="policy-cards"></div>
+    </div>
+    
+    <script src="config.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
