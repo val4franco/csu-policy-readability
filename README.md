@@ -176,6 +176,84 @@ To support vector-based search and retrieval:
 This index enables real-time semantic search for the chatbot.
 
 ---
+### 7. API Gateway Setup: Frontend → Lambda → Bedrock
+
+To connect the chatbot interface to backend processing, we use **AWS API Gateway** as a secure REST endpoint. This allows the frontend to send policy-related queries, which are handled by a Lambda function that searches policy vectors and generates a response using Claude via Amazon Bedrock.
+
+---
+
+####  Setup Instructions
+
+1. **Create a REST API**  
+   - Go to [AWS API Gateway Console](https://console.aws.amazon.com/apigateway)
+   - Choose **REST API** (not HTTP or WebSocket)
+   - Select "New API" and give it a name (e.g., `CSUPolicyChatAPI`)
+
+2. **Add a Resource**
+   - In the left panel, select **Resources**
+   - Click **Actions** → **Create Resource**
+   - Resource Name: `chat`
+   - Resource Path: `/chat`
+
+3. **Create a POST Method for `/chat`**
+   - Select the `/chat` resource
+   - Click **Actions** → **Create Method** → Choose `POST`
+   - Integration type: `Lambda Function`
+   - Use Lambda Proxy Integration: ✅ **checked**
+   - Specify the Lambda function name (e.g., `csuPolicyChatHandler`)
+   - Save and grant permission when prompted
+
+4. **Enable CORS on the `/chat` POST Method**
+   - Select the `POST` method under `/chat`
+   - Click **Actions** → **Enable CORS**
+   - Add the following headers if not automatically included:
+     ```
+
+---
+
+### 8. Create a Lambda Function
+
+- Go to the [AWS Lambda Console](https://console.aws.amazon.com/lambda)
+- Click **Create function**
+- **Function name:** 
+- **Runtime:** `Python 3.12`
+- **Permissions:** Select *"Create a new role with basic Lambda permissions"*
+- Click **Create function**
+
+---
+
+#### 2. Paste in Lambda Handler Code
+
+Replace the contents of `lambda_function.py` 
+
+####  3. Deploy Code and Test
+
+1. **Deploy your Lambda code:**
+   - In the AWS Lambda Console, go to your function (`csuPolicyChatHandler`)
+   - Open the **Code** tab
+   - Paste your code into `lambda_function.py` (or upload a ZIP if working locally)
+   - Click **Deploy**
+
+2. **Set up a Test Event** in the Lambda console:
+   - Click **Test**
+   - Create a new test event with the following sample input:
+
+     ```json
+     {
+       "body": "{\"query\": \"What is the CSU faculty leave policy?\"}"
+     }
+     ```
+
+   - Click **Test** again to run it.
+
+3. **Expected Response:**
+   - The output should return a 200 status code and a JSON object like:
+
+     ```json
+     {
+       "response": "According to CSU policy, faculty leave..."
+     }
+
 
 ## Project Output
 
