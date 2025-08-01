@@ -274,7 +274,7 @@ loadAndProcessPolicies().then(() => {
     console.error('Failed to load policies on startup:', error);
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`HR Policy Chatbot server running on port ${PORT}`);
-    console.log(`Access the application at http://localhost:${PORT}`);
+    console.log(`Access the application at http://0.0.0.0:${PORT}`);
 });
