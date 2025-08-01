@@ -105,7 +105,21 @@ Each policy folder contains:
 │   ├── chunk_002_metadata.json
 ```
 
+---
 
+### 5. Vector Index Creation
+
+To support vector-based search and retrieval:
+
+- We created multiple **S3 buckets**, which hold chunked text data and metadata.
+- We developed a script to:
+  - Pull chunked data from the bucket of chunked text data
+  - Embed the data using **Amazon Titan Embeddings V2**
+  - Push the resulting vector representations into a **vector index** stored in a S3 vector bucket: `policy-embeddings`
+
+This vector index is used to power the chatbot’s retrieval-augmented generation backend.
+
+---
 
 
 
@@ -131,4 +145,8 @@ Each policy folder contains:
 
 ## Authors
 
-- Savannah Bosley, Noor Dhaliwhal, Val Franco, Alvin Henry, Jasmine Ng, 
+- Savannah Bosley, Noor Dhaliwhal, Val Franco, Alvin Henry, Jasmine Ng, Nathan Theng
+
+### Mentor
+
+- Noor Dhaliwhal
