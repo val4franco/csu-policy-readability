@@ -12,8 +12,8 @@ We built a system to collect, process, and prepare CSU policy documents for use 
 
 ## Sources
 
-- **Public Policies**: Collected from [calstate.policystat.com](https://calstate.policystat.com/) report.csv
-- **Private Policies**: Internal SDSU policies (CSU credentials required)
+- **Public Cal State Policies**: Collected from [calstate.policystat.com](https://calstate.policystat.com/) report.csv
+- **Private SDSU Internal Policies**: Internal SDSU policies (CSU credentials required)
 
 ---
 
