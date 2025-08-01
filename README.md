@@ -12,8 +12,8 @@ We built a system to collect, process, and prepare CSU policy documents for use 
 
 ## Sources
 
-- **Public Policies**: Collected from [calstate.policystat.com](https://calstate.policystat.com/)
-- **Private Policies**: Internal SDSU policies (login required)
+- **Public Policies**: Collected from [calstate.policystat.com](https://calstate.policystat.com/) report.csv
+- **Private Policies**: Internal SDSU policies (CSU credentials required)
 
 ---
 
@@ -21,7 +21,7 @@ We built a system to collect, process, and prepare CSU policy documents for use 
 
 ### 1. Download Policies CSV
 
-We started with a CSV file called:
+Begin with a CSV file called:
 
 ```
 report.csv
@@ -33,13 +33,13 @@ which includes metadata and policy links.
 
 ### 2. Convert CSV to JSON
 
-We ran:
+Run:
 
 ```
 scrape_policy_texts_by_area.py
 ```
 
-This script converted `report.csv` to a structured JSON file:
+This script converts `report.csv` to a structured JSON file:
 
 ```
 calstate-policystat-list.json
@@ -107,23 +107,73 @@ Each policy folder contains:
 
 ---
 
-### 5. Vector Index Creation
+### 5. PDF Processor System
+
+#### `pdf_processor.py` – The Main Processing Engine
+
+This comprehensive engine prepares raw PDFs for retrieval-augmented generation (RAG). It includes:
+
+- **Downloads PDFs from S3**: Connects to your S3 bucket and pulls policy PDFs.
+- **Intelligent Chapter Detection**: Detects structure based on:
+  - Font size/style changes
+  - Section/chapter keywords
+  - Page breaks and headers
+  - Table presence
+- **Smart Chunking**: Splits PDFs into ~2000 character chunks with:
+  - Paragraph boundary preservation
+  - Overlapping context between chunks
+  - Logical structure awareness
+- **Table Extraction**: Extracts tables to clean, structured JSON.
+- **Metadata Generation**: Creates detailed metadata for each chunk, including:
+  - Source filename
+  - Area/Section
+  - Chapter headings
+  - Page numbers
+  - Character and token counts
+
+**Output Structure:**
+
+```
+output/
+├── Academic_and_Student_Affairs/
+│   ├── subfolder/
+│   │   ├── document_name/
+│   │   │   ├── chunk_001.txt
+│   │   │   ├── chunk_001_metadata.json
+│   │   │   ├── chunk_002.txt
+│   │   │   └── chunk_002_metadata.json
+```
+
+#### `run_pdf_processor.sh` – The Launcher Script
+
+This shell script manages the setup and launch of the processing engine:
+
+- **Environment Setup**: Activates or creates a Python virtual environment.
+- **AWS Credential Verification**: Ensures S3 access is configured.
+- **Dependency Installation**: Installs required Python packages.
+- **Error Handling**: Provides clear messages for missing dependencies or misconfigurations.
+
+**Usage:**
+
+```bash
+./run_pdf_processor.sh
+```
+
+You will be prompted for an S3 bucket name, and processing begins automatically.
+
+---
+
+### 6. Vector Index Creation
 
 To support vector-based search and retrieval:
 
 - We created multiple **S3 buckets**, which hold chunked text data and metadata.
-- We developed a script to:
-  - Pull chunked data from the bucket of chunked text data
-  - Embed the data using **Amazon Titan Embeddings V2**
-  - Push the resulting vector representations into a **vector index** stored in a S3 vector bucket: `policy-embeddings`
+- A script:
+  - Downloads chunked data from S3
+  - Embeds it using **Amazon Titan Embeddings V2**
+  - Uploads the resulting vector embeddings into a separate S3 bucket: `policy-embeddings`
 
-This vector index is used to power the chatbot’s retrieval-augmented generation backend.
-
----
-
-
-
-
+This index enables real-time semantic search for the chatbot.
 
 ---
 
@@ -131,18 +181,25 @@ This vector index is used to power the chatbot’s retrieval-augmented generatio
 
 - `calstate-policystat-list.json`: structured metadata
 - `policystat_texts/`: organized policy documents
-- All text and PDFs split into retrieval-ready chunks with metadata
+- `output/`: intelligently chunked PDFs with metadata
+- All content is retrieval-ready for AI-powered chatbot queries
 
 ---
 
 ## Future Work
 
-- Embed text chunks using vector database
-- Deploy chatbot with LLM retrieval backend (e.g., OpenAI, Claude, etc.)
-- Add SDSU internal policies once integrated securely
+- Embed text chunks into vector database (e.g., Pinecone, Faiss, OpenSearch)
+- Deploy chatbot interface with real-time query + document matching
+- Securely integrate SDSU internal policies
 
 ---
 
 ## Authors
-- Mentor: Noor Dhaliwhal
-- Savannah Bosley, Val Franco, Alvin Henry, Jasmine Ng, Nathan Theng
+
+- Mentor: Noor Dhaliwhal  
+- Savannah Bosley  
+- Val Franco  
+- Alvin Henry  
+- Jasmine Ng  
+- Nathan Theng
+
