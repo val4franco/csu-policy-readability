@@ -54,8 +54,9 @@ class PolicyChatbot {
         // Update title and subtitle
         this.updateTitleAndSubtitle(selectedUniversity);
         
-        // Add welcome message for new university
-        this.addWelcomeMessage();
+        // Show a small grey notification message
+        const universityName = window.CONFIG.UNIVERSITIES[selectedUniversity]?.name || selectedUniversity.toUpperCase();
+        this.addNotificationMessage(`Switched to ${universityName}`);
     }
     
     applyTheme(university) {
@@ -108,11 +109,11 @@ class PolicyChatbot {
         const selectedArea = this.areaFilter.value;
         console.log('Area filter changed to:', selectedArea || 'All Areas');
         
-        // Optional: Show a message when filter changes
+        // Show a small grey notification message
         if (selectedArea) {
-            this.addBotMessage(`Now filtering policies for: ${selectedArea}. Ask me anything about policies in this area!`);
+            this.addNotificationMessage(`Filtering policies for: ${selectedArea}`);
         } else {
-            this.addBotMessage('Now showing policies from all areas. What would you like to know?');
+            this.addNotificationMessage('Showing all policy areas');
         }
     }
     
@@ -206,6 +207,14 @@ class PolicyChatbot {
                 messageDiv.textContent = message;
             }
         }
+        this.chatMessages.appendChild(messageDiv);
+        this.scrollToBottom();
+    }
+    
+    addNotificationMessage(message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'notification-message';
+        messageDiv.textContent = message;
         this.chatMessages.appendChild(messageDiv);
         this.scrollToBottom();
     }

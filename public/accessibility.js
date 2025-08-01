@@ -112,7 +112,10 @@ function initializeAccessibility() {
             yakLogo.src = 'YakWhite.png';
             console.log('Initial set yakLogo to YakWhite.png', yakLogo);
         }
-        if (homepageLogo) homepageLogo.src = 'YakBookWhite.png';
+        if (homepageLogo) {
+            homepageLogo.src = 'YakBookWhite.png';
+            console.log('Initial set homepageLogo to YakBookWhite.png', homepageLogo);
+        }
     }
     
     // Set active buttons
