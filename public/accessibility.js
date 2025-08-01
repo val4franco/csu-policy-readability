@@ -49,6 +49,36 @@ function changeLetterSpacing(spacing) {
     localStorage.setItem('letterSpacing', spacing);
 }
 
+function changeThemeMode(theme) {
+    const body = document.body;
+    body.classList.remove('theme-light', 'theme-dark', 'theme-comfort');
+    body.classList.add(`theme-${theme}`);
+    
+    // Update logo images for dark mode
+    const yakLogo = document.getElementById('yakLogo');
+    const homepageLogo = document.querySelector('.homepage-logo');
+    const csuLogo = document.querySelector('.logo');
+    
+    if (theme === 'dark') {
+        if (yakLogo) yakLogo.src = 'YakWhite.png';
+        if (homepageLogo) homepageLogo.src = 'YakBookWhite.png';
+        if (csuLogo) csuLogo.src = 'YakWhite.png';
+    } else {
+        if (yakLogo) yakLogo.src = 'Yak.png';
+        if (homepageLogo) homepageLogo.src = 'YakBook.png';
+        if (csuLogo) csuLogo.src = 'logo-202-CSU.png';
+    }
+    
+    // Update active button
+    document.querySelectorAll('.theme-controls button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Save preference
+    localStorage.setItem('themeMode', theme);
+}
+
 // Initialize accessibility settings
 function initializeAccessibility() {
     // Load saved font size
@@ -64,6 +94,21 @@ function initializeAccessibility() {
     // Load saved letter spacing
     const savedLetterSpacing = localStorage.getItem('letterSpacing') || 'normal';
     document.body.classList.add(`letter-${savedLetterSpacing}`);
+    
+    // Load saved theme mode
+    const savedThemeMode = localStorage.getItem('themeMode') || 'light';
+    document.body.classList.add(`theme-${savedThemeMode}`);
+    
+    // Set initial logo images based on theme
+    const yakLogo = document.getElementById('yakLogo');
+    const homepageLogo = document.querySelector('.homepage-logo');
+    const csuLogo = document.querySelector('.logo');
+    
+    if (savedThemeMode === 'dark') {
+        if (yakLogo) yakLogo.src = 'YakWhite.png';
+        if (homepageLogo) homepageLogo.src = 'YakBookWhite.png';
+        if (csuLogo) csuLogo.src = 'YakWhite.png';
+    }
     
     // Set active buttons
     setTimeout(() => {
@@ -90,6 +135,17 @@ function initializeAccessibility() {
 
         document.querySelectorAll('.letter-controls button').forEach(btn => {
             if (btn.textContent.toLowerCase() === savedLetterSpacing) {
+                btn.classList.add('active');
+            }
+        });
+        
+        document.querySelectorAll('.theme-controls button').forEach(btn => {
+            const themeMap = {
+                'light': 'Light',
+                'dark': 'Dark',
+                'comfort': 'Eye Comfort'
+            };
+            if (btn.textContent === themeMap[savedThemeMode]) {
                 btn.classList.add('active');
             }
         });

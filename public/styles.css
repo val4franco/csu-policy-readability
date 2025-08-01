@@ -770,8 +770,148 @@ body.font-xlarge h1 { font-size: 3.5rem; }
 body.font-xlarge p { font-size: 1.4rem; }
 body.font-xlarge .cta-button { font-size: 1.2rem; padding: 18px 40px; }
 
+/* Dynamic Image Scaling */
+body.font-small .logo { width: 100px; height: 100px; }
+body.font-small .homepage-logo { width: 280px !important; height: 280px !important; }
+body.font-small .yak-logo { width: 150px; height: 150px; }
+
+body.font-normal .logo { width: 120px; height: 120px; }
+body.font-normal .homepage-logo { width: 350px !important; height: 350px !important; }
+body.font-normal .yak-logo { width: 180px; height: 180px; }
+
+body.font-large .logo { width: 140px; height: 140px; }
+body.font-large .homepage-logo { width: 420px !important; height: 420px !important; }
+body.font-large .yak-logo { width: 210px; height: 210px; }
+
+body.font-xlarge .logo { width: 160px; height: 160px; }
+body.font-xlarge .homepage-logo { width: 490px !important; height: 490px !important; }
+body.font-xlarge .yak-logo { width: 240px; height: 240px; }
+
+/* Dynamic Home Button Scaling */
+body.font-small .home-button { padding: 8px 16px; font-size: 0.8rem; }
+body.font-normal .home-button { padding: 12px 24px; font-size: 1rem; }
+body.font-large .home-button { padding: 14px 28px; font-size: 1.1rem; }
+body.font-xlarge .home-button { padding: 16px 32px; font-size: 1.2rem; }
+
+/* Theme Modes */
+body.theme-light {
+    background: white;
+    color: #333;
+}
+
+body.theme-dark {
+    background: #1a1a1a;
+    color: white;
+}
+
+body.theme-dark *,
+body.theme-dark h1,
+body.theme-dark p,
+body.theme-dark .hero * {
+    color: white !important;
+}
+
+body.theme-dark .accessibility-panel {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+body.theme-dark .chat-container {
+    background: #1a1a1a;
+    border: 2px solid white;
+}
+
+body.theme-dark .chat-messages {
+    background: #1a1a1a;
+}
+
+body.theme-dark .message {
+    background: white;
+    color: black;
+}
+
+body.theme-dark .message.bot {
+    background: white;
+    color: black;
+}
+
+body.theme-dark .message.user {
+    background: white;
+    color: black;
+}
+
+body.theme-dark .hero {
+    background: transparent;
+    border: none;
+}
+
+body.theme-dark .message.bot {
+    background: #404040;
+    color: white;
+}
+
+body.theme-dark #messageInput {
+    background: black;
+    color: white;
+    border: none;
+}
+
+body.theme-dark button {
+    color: white;
+}
+
+body.theme-dark select {
+    background: white;
+    color: black;
+}
+
+body.theme-dark .home-button {
+    background: white !important;
+    color: black !important;
+}
+
+body.theme-dark .cta-button {
+    background: white !important;
+    color: black !important;
+}
+
+body.theme-dark .accessibility-panel h3,
+body.theme-dark .accessibility-panel label {
+    color: white !important;
+}
+
+body.theme-dark .accessibility-panel button {
+    color: black !important;
+}
+
+body.theme-dark .accessibility-panel button:hover,
+body.theme-dark .accessibility-panel button.active {
+    color: white !important;
+}
+
+body.theme-comfort {
+    background: #fdf6e3;
+    color: #5c4b37;
+    filter: sepia(10%) saturate(120%) hue-rotate(15deg);
+}
+
+body.theme-comfort .chat-container,
+body.theme-comfort .hero,
+body.theme-comfort .accessibility-panel {
+    background: #f7f0d9;
+    border-color: #d4c5a9;
+}
+
+body.theme-comfort .message.bot {
+    background: #f0e6c7;
+    color: #5c4b37;
+}
+
+
+
 /* Additional Control Styles */
-.letter-controls {
+.letter-controls,
+.theme-controls {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -780,12 +920,14 @@ body.font-xlarge .cta-button { font-size: 1.2rem; padding: 18px 40px; }
     border-top: 1px solid #eee;
 }
 
-.letter-controls label {
+.letter-controls label,
+.theme-controls label {
     font-weight: 600;
     margin-right: 5px;
 }
 
-.letter-controls button {
+.letter-controls button,
+.theme-controls button {
     padding: 5px 12px;
     background: white;
     border: 1px solid #ddd;
@@ -795,12 +937,14 @@ body.font-xlarge .cta-button { font-size: 1.2rem; padding: 18px 40px; }
     transition: all 0.2s ease;
 }
 
-.letter-controls button:hover {
+.letter-controls button:hover,
+.theme-controls button:hover {
     background: var(--primary-color);
     color: white;
 }
 
-.letter-controls button.active {
+.letter-controls button.active,
+.theme-controls button.active {
     background: var(--primary-color);
     color: white;
 }
