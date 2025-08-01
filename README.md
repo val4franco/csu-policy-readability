@@ -4,20 +4,20 @@ This project creates a chatbot interface for exploring California State Universi
 
 ---
 
-## 📚 Overview
+## Overview
 
 We built a system to collect, process, and prepare CSU policy documents for use in a chatbot interface. Users can explore policies through conversational queries.
 
 ---
 
-## 🔍 Sources
+## Sources
 
 - **Public Policies**: Collected from [calstate.policystat.com](https://calstate.policystat.com/)
 - **Private Policies**: Internal SDSU policies (login required)
 
 ---
 
-## 🧾 Step-by-Step Process
+## Step-by-Step Process
 
 ### 1. Download Policies CSV
 
@@ -107,7 +107,7 @@ Each policy folder contains:
 
 ---
 
-## ✅ Project Output
+## Project Output
 
 - `calstate-policystat-list.json`: structured metadata
 - `policystat_texts/`: organized policy documents
@@ -115,7 +115,7 @@ Each policy folder contains:
 
 ---
 
-## 💬 Future Work
+## Future Work
 
 - Embed text chunks using vector database
 - Deploy chatbot with LLM retrieval backend (e.g., OpenAI, Claude, etc.)
@@ -123,6 +123,6 @@ Each policy folder contains:
 
 ---
 
-## 🧠 Authors
+## Authors
 
-- Savannah Bosley and collaborators
+- Savannah Bosley, Noor Dhaliwhal, Val Franco, Alvin Henry, Jasmine Ng, 
