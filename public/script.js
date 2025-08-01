@@ -134,26 +134,21 @@ class PolicyChatbot {
         this.addBotMessage('<div class="loading"></div>', true);
         
         try {
-            // Build the API URL with query parameters
-            const url = new URL(this.apiEndpoint);
-            url.searchParams.append('query', message);
+            // Prepare POST request body
+            const requestBody = {
+                query: message,
+                area: this.areaFilter.value || null
+            };
             
-            // Add area filter if selected
-            const selectedArea = this.areaFilter.value;
-            if (selectedArea) {
-                url.searchParams.append('area', selectedArea);
-            }
+            console.log('Making API call to:', this.apiEndpoint);
+            console.log('Request body:', requestBody);
             
-            // Add university context if needed (you might want to use this in your Lambda)
-            url.searchParams.append('university', this.currentUniversity);
-            
-            console.log('Making API call to:', url.toString());
-            
-            const response = await fetch(url.toString(), {
-                method: 'GET',
+            const response = await fetch(this.apiEndpoint, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                body: JSON.stringify(requestBody)
             });
             
             if (!response.ok) {
@@ -164,10 +159,18 @@ class PolicyChatbot {
             
             this.removeLastMessage();
             
-            if (data.response) {
-                this.addBotMessage(data.response);
-            } else if (data.error) {
-                this.addBotMessage(`Sorry, I encountered an error: ${data.error}`);
+            // Handle Lambda API Gateway response format
+            let responseData = data;
+            if (data.body) {
+                responseData = JSON.parse(data.body);
+            }
+            
+            if (responseData.answer) {
+                this.addBotMessage(responseData.answer);
+            } else if (responseData.response) {
+                this.addBotMessage(responseData.response);
+            } else if (responseData.error) {
+                this.addBotMessage(`Sorry, I encountered an error: ${responseData.error}`);
             } else {
                 this.addBotMessage(window.CONFIG.UI.ERROR_MESSAGES.NO_RESPONSE);
             }

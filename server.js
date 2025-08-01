@@ -198,14 +198,10 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Function to ensure policies are loaded
+// Function to ensure policies are loaded - disabled for external API
 async function ensurePoliciesLoaded() {
-    const now = Date.now();
-    const cacheExpiry = 30 * 60 * 1000; // 30 minutes
-    
-    if (!lastCacheUpdate || (now - lastCacheUpdate) > cacheExpiry || processedPolicies.length === 0) {
-        await loadAndProcessPolicies();
-    }
+    // Skip - using external API
+    return;
 }
 
 // Function to load and process all policies
@@ -267,12 +263,8 @@ async function loadAndProcessPolicies(forceRefresh = false) {
     }
 }
 
-// Initialize policies on startup
-loadAndProcessPolicies().then(() => {
-    console.log('Initial policy loading completed');
-}).catch(error => {
-    console.error('Failed to load policies on startup:', error);
-});
+// Skip S3 policy loading - using external API
+console.log('Using external API - skipping S3 policy loading');
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`HR Policy Chatbot server running on port ${PORT}`);

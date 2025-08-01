@@ -2,8 +2,8 @@
 // Update the API_ENDPOINT with your actual Lambda function URL
 
 const CONFIG = {
-    // Replace this with your actual API Gateway endpoint URL
-    API_ENDPOINT: 'https://your-api-gateway-endpoint.amazonaws.com/prod/chat',
+    // Your actual API Gateway endpoint URL
+    API_ENDPOINT: 'https://up9wt70xn5.execute-api.us-west-2.amazonaws.com/dev/getRespond',
     
     // CSU Areas - these should match exactly what's in your Lambda function
     AREAS: [
