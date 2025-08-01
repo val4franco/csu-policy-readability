@@ -57,16 +57,19 @@ function changeThemeMode(theme) {
     // Update logo images for dark mode
     const yakLogo = document.getElementById('yakLogo');
     const homepageLogo = document.querySelector('.homepage-logo');
-    const csuLogo = document.querySelector('.logo');
     
     if (theme === 'dark') {
-        if (yakLogo) yakLogo.src = 'YakWhite.png';
+        if (yakLogo) {
+            yakLogo.src = 'YakWhite.png';
+            console.log('Set yakLogo to YakWhite.png', yakLogo);
+        }
         if (homepageLogo) homepageLogo.src = 'YakBookWhite.png';
-        if (csuLogo) csuLogo.src = 'YakWhite.png';
     } else {
-        if (yakLogo) yakLogo.src = 'Yak.png';
+        if (yakLogo) {
+            yakLogo.src = 'Yak.png';
+            console.log('Set yakLogo to Yak.png', yakLogo);
+        }
         if (homepageLogo) homepageLogo.src = 'YakBook.png';
-        if (csuLogo) csuLogo.src = 'logo-202-CSU.png';
     }
     
     // Update active button
@@ -105,9 +108,11 @@ function initializeAccessibility() {
     const csuLogo = document.querySelector('.logo');
     
     if (savedThemeMode === 'dark') {
-        if (yakLogo) yakLogo.src = 'YakWhite.png';
+        if (yakLogo) {
+            yakLogo.src = 'YakWhite.png';
+            console.log('Initial set yakLogo to YakWhite.png', yakLogo);
+        }
         if (homepageLogo) homepageLogo.src = 'YakBookWhite.png';
-        if (csuLogo) csuLogo.src = 'YakWhite.png';
     }
     
     // Set active buttons

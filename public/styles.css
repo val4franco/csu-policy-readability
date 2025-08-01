@@ -818,7 +818,7 @@ body.theme-dark .accessibility-panel {
 
 body.theme-dark .chat-container {
     background: #1a1a1a;
-    border: 2px solid white;
+    border: 2px solid #666;
 }
 
 body.theme-dark .chat-messages {
@@ -828,16 +828,19 @@ body.theme-dark .chat-messages {
 body.theme-dark .message {
     background: white;
     color: black;
+    border: none;
 }
 
 body.theme-dark .message.bot {
     background: white;
     color: black;
+    border: none;
 }
 
 body.theme-dark .message.user {
     background: white;
     color: black;
+    border: none;
 }
 
 body.theme-dark .hero {
@@ -851,9 +854,19 @@ body.theme-dark .message.bot {
 }
 
 body.theme-dark #messageInput {
-    background: black;
+    background: #1a1a1a;
     color: white;
-    border: none;
+    border: 2px solid #666;
+}
+
+body.theme-dark #sendButton {
+    background: #1a1a1a;
+    color: white;
+}
+
+body.theme-dark .input-container {
+    border: 2px solid #666;
+    background: #666;
 }
 
 body.theme-dark button {
@@ -861,13 +874,53 @@ body.theme-dark button {
 }
 
 body.theme-dark select {
-    background: white;
-    color: black;
+    background: #666;
+    color: white;
+    outline: none !important;
+    border: 1px solid #ccc !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: transform 0.1s ease;
+    font-weight: bold;
+}
+
+body.theme-dark select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+}
+
+body.theme-dark select:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    transform: scale(1.05);
+}
+
+body.theme-dark select:focus-visible {
+    outline: none !important;
+    border: 1px solid #ccc !important;
+}
+
+body.theme-dark select option {
+    background: white !important;
+    color: black !important;
+}
+
+/* CSS-based logo switching for dark mode */
+body.theme-dark #yakLogo {
+    content: url('YakWhite.png');
+}
+
+body.theme-dark .accessibility-toggle {
+    background: #666;
+    color: white;
 }
 
 body.theme-dark .home-button {
-    background: white !important;
-    color: black !important;
+    background: #666 !important;
+    color: white !important;
 }
 
 body.theme-dark .cta-button {
@@ -895,11 +948,30 @@ body.theme-comfort {
     filter: sepia(10%) saturate(120%) hue-rotate(15deg);
 }
 
-body.theme-comfort .chat-container,
+body.theme-comfort .chat-container {
+    background: #f4f1e8;
+    border-color: #d4c5a9;
+}
+
 body.theme-comfort .hero,
 body.theme-comfort .accessibility-panel {
     background: #f7f0d9;
     border-color: #d4c5a9;
+}
+
+body.theme-comfort .chat-messages {
+    background: #f4f1e8;
+}
+
+body.theme-comfort .input-container {
+    background: #f4f1e8;
+}
+
+body.theme-comfort .home-button,
+body.theme-comfort #sendButton,
+body.theme-comfort .accessibility-toggle {
+    background: #c8a882;
+    color: white;
 }
 
 body.theme-comfort .message.bot {

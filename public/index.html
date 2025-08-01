@@ -31,9 +31,16 @@
             text-align: center;
             padding: 25px 25px;
             margin: 0;
-            background: #ffffff;
-            border-radius: 24px;
+            background: transparent !important;
+            border-radius: 0;
         }
+        
+        body.theme-light .homepage-logo,
+        body.theme-comfort .homepage-logo {
+            content: url('YakBook.png');
+        }
+        
+
 
 
         .hero p {
@@ -119,13 +126,7 @@
                 <button onclick="changeFontSize('large')">Large</button>
                 <button onclick="changeFontSize('xlarge')">Extra Large</button>
             </div>
-            <div class="color-controls">
-                <label>Color Mode:</label>
-                <button onclick="changeColorMode('normal')">Normal</button>
-                <button onclick="changeColorMode('protanopia')">Red-Blind</button>
-                <button onclick="changeColorMode('deuteranopia')">Green-Blind</button>
-                <button onclick="changeColorMode('tritanopia')">Blue-Blind</button>
-            </div>
+
 
 
             <div class="letter-controls">
