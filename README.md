@@ -144,6 +144,5 @@ This vector index is used to power the chatbot’s retrieval-augmented generatio
 ---
 
 ## Authors
+- Mentor: Noor Dhaliwhal
 - Savannah Bosley, Val Franco, Alvin Henry, Jasmine Ng, Nathan Theng
-## Mentor
-- Noor Dhaliwhal
